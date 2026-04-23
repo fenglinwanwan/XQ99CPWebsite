@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs><linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#0d9488"/><stop offset="100%" style="stop-color:#8b5cf6"/></linearGradient></defs>
+  <rect width="600" height="400" fill="url(#g9)"/>
+  <text x="300" y="190" text-anchor="middle" font-size="50" fill="rgba(255,255,255,0.8)">⭐</text>
+  <text x="300" y="260" text-anchor="middle" font-size="20" fill="rgba(255,255,255,0.5)" font-family="sans-serif">新人报道</text>
+  <text x="300" y="320" text-anchor="middle" font-size="16" fill="rgba(255,255,255,0.6)" font-family="sans-serif">欢迎新粉丝</text>
+</svg>
