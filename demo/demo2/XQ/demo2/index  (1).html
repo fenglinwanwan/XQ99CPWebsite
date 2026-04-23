@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星有千千杰 ✦ 星邱CP安利站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+/* ========== RESET & VARIABLES ========== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --p1:#8888D0;--p2:#CCD1F7;--p3:#E9E8F0;
+  --bg:#08081a;--bg2:#0e0e28;--card:#14143a;--card-h:#1c1c50;
+  --txt:#eeeef8;--txt2:#a8a5c8;--txt3:#6e6b8a;
+  --gold:#f0d060;
+  --grad:linear-gradient(135deg,#8888D0,#a07ce0,#CCD1F7);
+  --serif:'Noto Serif SC','Source Han Serif SC','STSong',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(136,136,208,.4);color:#fff}
+a{color:inherit;text-decoration:none}
+
+/* ========== STARFIELD ========== */
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ========== NAV ========== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:.3s}
+nav.scrolled{background:rgba(8,8,26,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(136,136,208,.12);padding:10px 0}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--p2);letter-spacing:.04em}
+.nav-links{display:flex;gap:24px}
+.nav-links a{color:var(--txt2);font-size:.88rem;transition:.3s;position:relative}
+.nav-links a:hover{color:var(--p2)}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;background:var(--grad);transform:scaleX(0);transition:.3s}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-btn{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-btn span{width:22px;height:2px;background:var(--p2);border-radius:2px;transition:.3s}
+.mob{display:none;position:fixed;inset:0;z-index:99;background:rgba(8,8,26,.96);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mob.on{display:flex}
+.mob a{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--p2);transition:.3s}
+.mob a:hover{color:var(--gold)}
+
+/* ========== HERO ========== */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:1}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(136,136,208,.12) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 30% 70%,rgba(160,124,224,.08) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 80% 30%,rgba(96,128,224,.06) 0%,transparent 50%);animation:neb 80s linear infinite}
+@keyframes neb{to{transform:rotate(360deg)}}
+.hero-inner{position:relative;z-index:2;text-align:center;padding:0 24px}
+.hero-sub{font-size:.85rem;color:var(--p2);letter-spacing:.35em;margin-bottom:20px;opacity:0;animation:fu .8s .3s forwards}
+.hero-title{font-family:var(--serif);font-size:clamp(3rem,11vw,8rem);font-weight:900;letter-spacing:.12em;margin-bottom:20px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 60px rgba(136,136,208,.25))}
+.hero-title span{display:inline-block;opacity:0;animation:cr .5s forwards}
+.hero-title span:nth-child(1){animation-delay:.4s}.hero-title span:nth-child(2){animation-delay:.55s}.hero-title span:nth-child(3){animation-delay:.7s}.hero-title span:nth-child(4){animation-delay:.85s}.hero-title span:nth-child(5){animation-delay:1s}
+@keyframes cr{0%{opacity:0;transform:translateY(40px) scale(.7);filter:blur(12px)}100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.hero-lyric{font-family:var(--serif);font-size:clamp(.95rem,2.2vw,1.3rem);color:var(--txt2);font-style:italic;margin-bottom:28px;opacity:0;animation:fu .8s 1.2s forwards}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px;opacity:0;animation:fu .8s 1.4s forwards}
+.ht{padding:6px 18px;border:1px solid rgba(136,136,208,.25);border-radius:100px;font-size:.82rem;color:var(--p2);background:rgba(136,136,208,.06)}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;background:var(--grad);color:#fff;border-radius:100px;font-weight:600;font-size:.95rem;letter-spacing:.04em;opacity:0;animation:fu .8s 1.6s forwards;transition:.3s;box-shadow:0 4px 30px rgba(136,136,208,.3)}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(136,136,208,.5)}
+.hero-cta svg{animation:bd 2s infinite}
+@keyframes bd{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+@keyframes fu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* rings */
+.rings{position:absolute;bottom:36px;right:36px;z-index:10;cursor:pointer;opacity:0;animation:fu .8s 2s forwards;transition:.3s;width:56px;height:56px}
+.rings:hover{transform:scale(1.15)}
+.rr,.rb{position:absolute;width:26px;height:26px;border-radius:50%;border:3px solid;top:50%;transform:translateY(-50%);transition:.4s}
+.rr{left:3px;border-color:#e06070;box-shadow:0 0 12px rgba(224,96,112,.5)}
+.rb{right:3px;border-color:#6080e0;box-shadow:0 0 12px rgba(96,128,224,.5)}
+.rings.on .rr{left:14px;box-shadow:0 0 24px rgba(224,96,112,.8)}
+.rings.on .rb{right:14px;box-shadow:0 0 24px rgba(96,128,224,.8)}
+
+/* ========== SECTION COMMON ========== */
+.sec{position:relative;z-index:1;padding:100px 0}
+.sec:nth-child(even){background:var(--bg2)}
+.sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(136,136,208,.04) 0%,transparent 70%);pointer-events:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.stitle{font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:700;text-align:center;margin-bottom:56px;color:var(--p2);letter-spacing:.06em}
+
+/* ========== ABOUT ========== */
+.intro{background:var(--card);border:1px solid rgba(136,136,208,.12);border-radius:16px;padding:44px;text-align:center;max-width:760px;margin:0 auto 44px;position:relative;overflow:hidden}
+.intro::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.intro p{font-size:1.05rem;line-height:2;color:var(--txt2)}
+.intro strong{color:var(--p2)}
+.hl{color:var(--gold);font-weight:600}
+.stats{display:flex;justify-content:center;gap:56px;margin-top:36px}
+.stat-n{font-family:var(--serif);font-size:2.4rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-l{font-size:.82rem;color:var(--txt3);margin-top:2px;letter-spacing:.12em}
+.kws{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:660px;margin:0 auto}
+.kw{padding:7px 18px;background:rgba(136,136,208,.08);border:1px solid rgba(136,136,208,.18);border-radius:100px;font-size:.88rem;color:var(--p2);transition:.3s;cursor:default;opacity:0;transform:translateY(12px)}
+.kw.v{opacity:1;transform:translateY(0)}
+.kw:hover{background:rgba(136,136,208,.18);transform:translateY(-2px);box-shadow:0 4px 18px rgba(136,136,208,.18)}
+
+/* ========== PROFILES ========== */
+.pgrid{display:flex;align-items:center;gap:20px}
+.pcard{flex:1;background:var(--card);border:1px solid rgba(136,136,208,.12);border-radius:16px;padding:36px;position:relative;overflow:hidden;transition:.35s}
+.pcard:hover{transform:translateY(-4px);border-color:rgba(136,136,208,.28);box-shadow:0 16px 50px rgba(136,136,208,.1)}
+.pglow{position:absolute;top:-60%;width:180px;height:180px;border-radius:50%;filter:blur(80px);opacity:.12;transition:.4s}
+.pcard:hover .pglow{opacity:.22}
+.phx .pglow{left:-40px;background:#e06070}
+.pqd .pglow{right:-40px;background:#6080e0}
+.pav{text-align:center;margin-bottom:20px}
+.pavc{width:90px;height:90px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:2.2rem;border:2px solid rgba(136,136,208,.25)}
+.phx .pavc{background:rgba(224,96,112,.1);border-color:rgba(224,96,112,.3)}
+.pqd .pavc{background:rgba(96,128,224,.1);border-color:rgba(96,128,224,.3)}
+.pinfo h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;text-align:center;margin-bottom:18px}
+.en{font-family:var(--sans);font-size:.85rem;font-weight:400;color:var(--txt3);margin-left:6px}
+.dr{display:flex;gap:10px;font-size:.88rem;margin-bottom:8px}
+.dr .lb{color:var(--txt3);min-width:48px;flex-shrink:0}
+.dr .lb+span{color:var(--txt2)}
+.bridge{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 6px}
+.bl{width:2px;height:36px;background:var(--grad);opacity:.35}
+.bs{font-size:1.4rem;color:var(--p1);animation:pulse 3s infinite}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+.bt{font-family:var(--serif);font-size:.82rem;color:var(--p2);letter-spacing:.2em;writing-mode:vertical-rl}
+
+/* ========== TIMELINE ========== */
+.tl{position:relative;max-width:860px;margin:0 auto}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--p1),var(--p2),var(--p1),transparent);transform:translateX(-50%)}
+.ti{position:relative;width:50%;padding:14px 0;opacity:0;transform:translateY(28px);transition:all .55s ease}
+.ti.v{opacity:1;transform:translateY(0)}
+.tl .ti{padding-right:44px;text-align:right}
+.tr .ti{margin-left:50%;padding-left:44px}
+.td{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--p1);border:3px solid var(--bg);top:24px;z-index:2;box-shadow:0 0 14px rgba(136,136,208,.45)}
+.tl .ti .td{right:-6px}
+.tr .ti .td{left:-6px}
+.tc{background:var(--card);border:1px solid rgba(136,136,208,.1);border-radius:10px;padding:18px 22px;transition:.3s}
+.tc:hover{border-color:rgba(136,136,208,.28);box-shadow:0 6px 28px rgba(136,136,208,.08)}
+.tdate{font-size:.78rem;color:var(--p1);font-weight:600;letter-spacing:.12em;margin-bottom:4px}
+.tc h4{font-family:var(--serif);font-size:1.05rem;color:var(--p2);margin-bottom:6px}
+.tc p{font-size:.85rem;color:var(--txt2);line-height:1.65}
+
+/* ========== MUSIC ========== */
+.ml{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.mc{display:flex;align-items:center;gap:20px;background:var(--card);border:1px solid rgba(136,136,208,.1);border-radius:10px;padding:22px 26px;transition:.35s;cursor:default;opacity:0;transform:translateX(-16px)}
+.mc.v{opacity:1;transform:translateX(0)}
+.mc:hover{border-color:rgba(136,136,208,.28);background:var(--card-h);transform:translateX(4px);box-shadow:0 6px 28px rgba(136,136,208,.08)}
+.mr{font-family:var(--serif);font-size:1.9rem;font-weight:900;color:rgba(136,136,208,.2);min-width:44px;text-align:center;transition:.3s}
+.mc:hover .mr{color:var(--p1)}
+.mi{flex:1}
+.mi h4{font-family:var(--serif);font-size:1.15rem;color:var(--txt);margin-bottom:3px}
+.md{font-size:.8rem;color:var(--txt3);margin-bottom:5px}
+.mq{font-size:.85rem;color:var(--p2);font-style:italic}
+.mb{padding:5px 12px;border-radius:100px;font-size:.78rem;background:rgba(136,136,208,.1);border:1px solid rgba(136,136,208,.18);color:var(--p2);white-space:nowrap}
+.mb.hot{background:rgba(240,208,96,.08);border-color:rgba(240,208,96,.25);color:var(--gold)}
+
+/* ========== MOMENTS ========== */
+.mog{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mo{position:relative;background:var(--card);border:1px solid rgba(136,136,208,.1);border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:default;transition:.35s}
+.mo.lg{grid-column:span 2}
+.mo:hover{transform:translateY(-4px);border-color:rgba(136,136,208,.28);box-shadow:0 10px 36px rgba(136,136,208,.12)}
+.moi{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:22px;background:linear-gradient(0deg,rgba(8,8,26,.92) 0%,rgba(8,8,26,.35) 55%,transparent 100%);z-index:2;transition:.3s}
+.moe{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:.1;background:linear-gradient(135deg,rgba(136,136,208,.04),rgba(136,136,208,.01))}
+.mot{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.7rem;background:rgba(136,136,208,.18);color:var(--p2);margin-bottom:6px;align-self:flex-start;letter-spacing:.04em}
+.moi h4{font-family:var(--serif);font-size:1.05rem;color:var(--txt);margin-bottom:3px}
+.moi p{font-size:.82rem;color:var(--txt2)}
+
+/* ========== WORKS ========== */
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.wc{background:var(--card);border:1px solid rgba(136,136,208,.1);border-radius:10px;padding:28px;transition:.3s}
+.wc:hover{border-color:rgba(136,136,208,.28);transform:translateY(-2px)}
+.wc h3{font-family:var(--serif);font-size:1.05rem;color:var(--p2);margin-bottom:14px}
+.wc ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.wc li{font-size:.88rem;color:var(--txt2);padding-left:16px;position:relative}
+.wc li::before{content:'✦';position:absolute;left:0;color:var(--p1);font-size:.65rem}
+.wc li strong{color:var(--txt)}
+
+/* ========== FOOTER ========== */
+footer{position:relative;z-index:1;padding:56px 0 36px;border-top:1px solid rgba(136,136,208,.08)}
+.fc{text-align:center}
+.fc-cp{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--p2);margin-bottom:6px}
+.fc-q{font-family:var(--serif);font-style:italic;color:var(--txt3);margin-bottom:18px}
+.fc-tags{display:flex;gap:14px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.fc-tags span{font-size:.82rem;color:var(--p1);letter-spacing:.04em}
+.fc-note{font-size:.78rem;color:var(--txt3)}
+
+/* ========== BTT ========== */
+.btt{position:fixed;bottom:28px;right:28px;width:42px;height:42px;border-radius:50%;background:rgba(136,136,208,.18);border:1px solid rgba(136,136,208,.25);color:var(--p2);cursor:pointer;z-index:50;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(16px);transition:.3s;backdrop-filter:blur(10px)}
+.btt.on{opacity:1;transform:translateY(0)}
+.btt:hover{background:var(--p1);color:#fff;transform:translateY(-2px)}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:768px){
+  .nav-links{display:none}.nav-btn{display:flex}
+  .pgrid{flex-direction:column}
+  .bridge{flex-direction:row;padding:10px 0}
+  .bl{width:36px;height:2px}
+  .bt{writing-mode:horizontal-tb}
+  .tl-line{left:18px}
+  .ti,.tl .ti,.tr .ti{width:100%;padding-left:44px;padding-right:0;text-align:left;margin-left:0}
+  .tl .ti .td,.tr .ti .td{left:11px;right:auto}
+  .mog{grid-template-columns:1fr}
+  .mo.lg{grid-column:span 1}
+  .wg{grid-template-columns:1fr}
+  .stats{gap:28px}
+  .mc{flex-direction:column;text-align:center;gap:10px}
+  .mb{align-self:center}
+}
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<canvas id="starfield"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">✦ 星有千千杰</a>
+    <div class="nav-links">
+      <a href="#about">入坑指南</a>
+      <a href="#profiles">双人档案</a>
+      <a href="#timeline">星邱时刻</a>
+      <a href="#music">必听爆曲</a>
+      <a href="#moments">名场面</a>
+      <a href="#works">物料站</a>
+    </div>
+    <button class="nav-btn" id="navBtn"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <a href="#about">入坑指南</a>
+  <a href="#profiles">双人档案</a>
+  <a href="#timeline">星邱时刻</a>
+  <a href="#music">必听爆曲</a>
+  <a href="#moments">名场面</a>
+  <a href="#works">物料站</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-sub">— 银河系 CP 安利站 —</div>
+    <h1 class="hero-title">
+      <span>星</span><span>有</span><span>千</span><span>千</span><span>杰</span>
+    </h1>
+    <p class="hero-lyric">"生命的同花顺，底牌没有你我不认"</p>
+    <div class="hero-tags">
+      <span class="ht">黄星Eliot ✦ 邱鼎杰Kipuka</span>
+      <span class="ht">粉丝：星球杯</span>
+      <span class="ht">应援色：银河紫</span>
+    </div>
+    <a href="#about" class="hero-cta">
+      <span>开始入坑</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </div>
+  <div class="rings" id="rings" title="✦">
+    <div class="rr"></div><div class="rb"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="wrap">
+    <h2 class="stitle">🪐 一眼入坑</h2>
+    <div class="intro">
+      <p>
+        <strong>星邱</strong>，又名<strong>"星有千千杰"</strong>，粉丝称为<strong>星球杯</strong>。<br>
+        一个是射手座的央美才子，一个是白羊座的上戏演员。<br>
+        从《垂涎》定情到澳门见面会，从沙漠牵手到国风舞台封神——<br>
+        <span class="hl">家产式爱情，家属感拉满，互为底牌，双向奔赴。</span>
+      </p>
+      <div class="stats">
+        <div><div class="stat-n" data-c="99">0</div><div class="stat-l">星邱永恒</div></div>
+        <div><div class="stat-n" data-c="1314">0</div><div class="stat-l">千千杰</div></div>
+        <div><div class="stat-n" style="font-size:2.8rem">∞</div><div class="stat-l">星球杯</div></div>
+      </div>
+    </div>
+    <div class="kws">
+      <span class="kw">家产式爱情</span>
+      <span class="kw">双向奔赴</span>
+      <span class="kw">互为底牌</span>
+      <span class="kw">唱演双强</span>
+      <span class="kw">银河紫</span>
+      <span class="kw">星有千千杰</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section id="profiles" class="sec">
+  <div class="wrap">
+    <h2 class="stitle">👤 双人档案</h2>
+    <div class="pgrid">
+      <div class="pcard phx">
+        <div class="pglow"></div>
+        <div class="pav"><div class="pavc">✦</div></div>
+        <div class="pinfo">
+          <h3>黄星 <span class="en">Eliot</span></h3>
+          <div class="dr"><span class="lb">生日</span><span>1999.11.25</span></div>
+          <div class="dr"><span class="lb">星座</span><span>射手座 ♐</span></div>
+          <div class="dr"><span class="lb">院校</span><span>中央美术学院</span></div>
+          <div class="dr"><span class="lb">选秀</span><span>《亚洲超星团》</span></div>
+          <div class="dr"><span class="lb">影视</span><span>《垂涎》《仙君有劫》</span></div>
+          <div class="dr"><span class="lb">关键词</span><span>央美才子 · 唱跳全能</span></div>
+        </div>
+      </div>
+      <div class="bridge">
+        <div class="bl"></div>
+        <div class="bs">✦</div>
+        <div class="bt">星邱99</div>
+        <div class="bl"></div>
+      </div>
+      <div class="pcard pqd">
+        <div class="pglow"></div>
+        <div class="pav"><div class="pavc">✦</div></div>
+        <div class="pinfo">
+          <h3>邱鼎杰 <span class="en">Kipuka</span></h3>
+          <div class="dr"><span class="lb">生日</span><span>1998.04.03</span></div>
+          <div class="dr"><span class="lb">星座</span><span>白羊座 ♈</span></div>
+          <div class="dr"><span class="lb">院校</span><span>上海电影学院</span></div>
+          <div class="dr"><span class="lb">组合</span><span>Desire4</span></div>
+          <div class="dr"><span class="lb">影视</span><span>《垂涎》《花戎》《对我而言危险的他》</span></div>
+          <div class="dr"><span class="lb">关键词</span><span>实力演员 · 温柔暴击</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline" class="sec">
+  <div class="wrap">
+    <h2 class="stitle">⏳ 星邱时刻</h2>
+    <div class="tl">
+      <div class="tl-line"></div>
+      <div class="ti tl"><div class="td"></div><div class="tc"><div class="tdate">2025</div><h4>《垂涎》定情</h4><p>双男主影视作品，星邱缘分的起点。从对手戏到眼神拉丝，一切都从这里开始。</p></div></div>
+      <div class="ti tr"><div class="td"></div><div class="tc"><div class="tdate">2025</div><h4>《同花顺》出圈</h4><p>"生命的同花顺，底牌没有你我不认" —— 宿命感爆棚的 CP 神曲，全网传唱。</p></div></div>
+      <div class="ti tl"><div class="td"></div><div class="tc"><div class="tdate">2025 七夕</div><h4>《星空剪影》</h4><p>黄浦江边灵感的浪漫治愈曲，播放破千万，成为七夕限定浪漫。</p></div></div>
+      <div class="ti tr"><div class="td"></div><div class="tc"><div class="tdate">2025 底</div><h4>动物园名场面</h4><p>红蓝对戒无名指事件引爆全网，左手佩戴位置的隐喻被粉丝解读为"无声官宣"。</p></div></div>
+      <div class="ti tl"><div class="td"></div><div class="tc"><div class="tdate">2026.01</div><h4>澳门见面会</h4><p>白西装华尔兹 + 戴戒，婚宴级灯光舞美，眼神拉丝、默契拉满。</p></div></div>
+      <div class="ti tr"><div class="td"></div><div class="tc"><div class="tdate">2026.02.14</div><h4>《我应该去爱你》</h4><p>情人节告白金曲，3小时破百万，QQ音乐巅峰榜 TOP5。年度告白王炸。</p></div></div>
+      <div class="ti tl"><div class="td"></div><div class="tc"><div class="tdate">2026.02</div><h4>气球转场糖</h4><p>邱鼎杰突然入镜搂抱，"不管黑白都是我的"，名场面又添一笔。</p></div></div>
+      <div class="ti tr"><div class="td"></div><div class="tc"><div class="tdate">2026.03.01</div><h4>春日玫瑰骑行</h4><p>春日限定大片，浪漫与活力并存的玫瑰骑行。</p></div></div>
+      <div class="ti tl"><div class="td"></div><div class="tc"><div class="tdate">2026.03.03</div><h4>拉芳直播</h4><p>互喊"宝"、拼豆、读手写信、吃汤圆——家属感爆棚的直播名场面。</p></div></div>
+      <div class="ti tr"><div class="td"></div><div class="tc"><div class="tdate">2026.03.05</div><h4>《陌路莫回》封神</h4><p>国风巅峰之作，戏腔 + 深情对唱。"江山再美水中花，万里乾坤不如他" —— 声线绝配。</p></div></div>
+      <div class="ti tl"><div class="td"></div><div class="tc"><div class="tdate">2026.03.08</div><h4>沙漠牵手 Vlog</h4><p>落日牵手、耳麦缠绕，氛围感天花板。两个人的沙漠，两个人的宇宙。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music" class="sec">
+  <div class="wrap">
+    <h2 class="stitle">🎵 必听爆曲</h2>
+    <div class="ml">
+      <div class="mc"><div class="mr">01</div><div class="mi"><h4>陌路莫回</h4><div class="md">国风封神 · 戏腔+深情对唱 · 2026.3.5</div><div class="mq">"江山再美水中花，万里乾坤不如他"</div></div><div class="mb hot">🔥 封神</div></div>
+      <div class="mc"><div class="mr">02</div><div class="mi"><h4>同花顺</h4><div class="md">出圈神曲 · 宿命感拉满 · 2025</div><div class="mq">"生命的同花顺，底牌没有你我不认"</div></div><div class="mb">💫 出圈</div></div>
+      <div class="mc"><div class="mr">03</div><div class="mi"><h4>我应该去爱你</h4><div class="md">情人节王炸 · 3h破百万 · TOP5 · 2026.2.14</div><div class="mq">年度告白金句 · QQ音乐巅峰榜</div></div><div class="mb">💖 告白</div></div>
+      <div class="mc"><div class="mr">04</div><div class="mi"><h4>星空剪影</h4><div class="md">七夕限定浪漫 · 播放破千万 · 2025七夕</div><div class="mq">黄浦江边灵感 · 浪漫治愈</div></div><div class="mb">🌙 治愈</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MOMENTS -->
+<section id="moments" class="sec">
+  <div class="wrap">
+    <h2 class="stitle">📸 嗑到上头</h2>
+    <div class="mog">
+      <div class="mo lg"><div class="moi"><span class="mot">名场面</span><h4>生日会 · 宇航员送玫瑰</h4><p>邱鼎杰穿宇航服送玫瑰、推蛋糕、戴皇冠，全程护场"不许抢"</p></div><div class="moe">🎂</div></div>
+      <div class="mo"><div class="moi"><span class="mot">氛围感天花板</span><h4>沙漠牵手 Vlog</h4><p>落日牵手、耳麦缠绕</p></div><div class="moe">🌅</div></div>
+      <div class="mo"><div class="moi"><span class="mot">家属感爆棚</span><h4>拉芳直播</h4><p>互喊"宝" · 拼豆 · 读信 · 吃汤圆</p></div><div class="moe">💌</div></div>
+      <div class="mo"><div class="moi"><span class="mot">舞台封神</span><h4>《陌路莫回》国风</h4><p>眼神拉丝 · 默契拉满</p></div><div class="moe">🎤</div></div>
+      <div class="mo"><div class="moi"><span class="mot">转场糖</span><h4>气球名场面</h4><p>"不管黑白都是我的"</p></div><div class="moe">🎈</div></div>
+      <div class="mo lg"><div class="moi"><span class="mot">白西装</span><h4>澳门见面会 · 华尔兹+戴戒</h4><p>婚宴级舞美 · 眼神拉丝 · CP舞台天花板</p></div><div class="moe">💒</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works" class="sec">
+  <div class="wrap">
+    <h2 class="stitle">📺 物料站</h2>
+    <div class="wg">
+      <div class="wc"><h3>🎬 影视作品</h3><ul><li><strong>《垂涎》</strong> — 双男主定情之作 ✦</li><li>《仙君有劫》 — 黄星</li><li>《花戎》 — 邱鼎杰</li><li>《对我而言危险的他》 — 邱鼎杰</li></ul></div>
+      <div class="wc"><h3>🎤 舞台现场</h3><ul><li>《陌路莫回》国风直拍</li><li>澳门见面会合唱</li><li>演唱会双人舞台</li></ul></div>
+      <div class="wc"><h3>📹 最新物料</h3><ul><li>3.1 春日玫瑰骑行大片</li><li>3.3 拉芳直播</li><li>3.5 《陌路莫回》MV</li><li>3.8 沙漠 Vlog</li><li>工作日常 Vlog</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fc">
+      <div class="fc-cp">✦ 星有千千杰 ✦</div>
+      <p class="fc-q">"万里乾坤不如他"</p>
+      <div class="fc-tags"><span>#星邱99</span><span>#星球杯</span><span>#银河紫</span><span>#家产式爱情</span></div>
+      <p class="fc-note">星球杯用爱搭建 · 非官方安利站</p>
+    </div>
+  </div>
+</footer>
+
+<!-- BTT -->
+<button class="btt" id="btt" aria-label="top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ===== STARFIELD ===== */
+!function(){const c=document.getElementById('starfield'),x=c.getContext('2d');let s=[],sh=[];const N=180;
+function rs(){c.width=innerWidth;c.height=innerHeight}
+function cs(){s=[];for(let i=0;i<N;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.3,a:Math.random()*.7+.2,sp:Math.random()*.25+.04,tp:Math.random()*6.28,ts:Math.random()*.018+.004,
+col:Math.random()>.7?'rgba(136,136,208,'+(Math.random()*.5+.2)+')':Math.random()>.5?'rgba(204,209,247,'+(Math.random()*.4+.2)+')':'rgba(233,232,240,'+(Math.random()*.35+.25)+')'})}
+function ss(){if(Math.random()>.004)return;sh.push({x:Math.random()*c.width,y:0,l:Math.random()*70+30,sp:Math.random()*7+3,a:1,ag:Math.PI/4+Math.random()*.3})}
+function d(){x.clearRect(0,0,c.width,c.height);
+s.forEach(p=>{p.tp+=p.ts;const tw=(Math.sin(p.tp)+1)/2,al=p.a*(.4+tw*.6);
+x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.globalAlpha=al;x.fillStyle=p.col;x.fill();
+if(p.r>1){const g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);g.addColorStop(0,'rgba(136,136,208,.12)');g.addColorStop(1,'rgba(136,136,208,0)');x.beginPath();x.arc(p.x,p.y,p.r*3,0,6.28);x.fillStyle=g;x.globalAlpha=al*.4;x.fill()}
+p.y+=p.sp*.08;if(p.y>c.height+5){p.y=-5;p.x=Math.random()*c.width}});
+ss();sh=sh.filter(w=>{w.x+=Math.cos(w.ag)*w.sp;w.y+=Math.sin(w.ag)*w.sp;w.a-=.012;
+x.globalAlpha=w.a;x.strokeStyle='rgba(204,209,247,.7)';x.lineWidth=1.5;x.beginPath();x.moveTo(w.x,w.y);x.lineTo(w.x-Math.cos(w.ag)*w.l,w.y-Math.sin(w.ag)*w.l);x.stroke();
+x.beginPath();x.arc(w.x,w.y,1.5,0,6.28);x.fillStyle='#fff';x.globalAlpha=w.a;x.fill();
+return w.a>0&&w.x<c.width+80&&w.y<c.height+80});
+x.globalAlpha=1;requestAnimationFrame(d)}
+rs();cs();d();addEventListener('resize',()=>{rs();cs()})}();
+
+/* ===== NAV ===== */
+const nav=document.getElementById('nav'),btt=document.getElementById('btt');
+addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>40);
+  btt.classList.toggle('on',scrollY>400);
+});
+btt.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+
+/* ===== MOBILE ===== */
+const nb=document.getElementById('navBtn'),mb=document.getElementById('mob');
+nb.onclick=()=>mb.classList.toggle('on');
+mb.querySelectorAll('a').forEach(a=>a.onclick=()=>mb.classList.remove('on'));
+
+/* ===== RINGS ===== */
+document.getElementById('rings').onclick=function(){
+  this.classList.toggle('on');
+  if(this.classList.contains('on')){const r=this.getBoundingClientRect();fw(r.left+28,r.top+28)}
+};
+function fw(px,py){for(let i=0;i<18;i++){const d=document.createElement('div');d.style.cssText='position:fixed;left:'+px+'px;top:'+py+'px;width:4px;height:4px;border-radius:50%;background:'+(Math.random()>.5?'#e06070':'#6080e0')+';pointer-events:none;z-index:1000';document.body.appendChild(d);const a=6.28*i/18,v=45+Math.random()*70;d.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:'translate('+Math.cos(a)*v+'px,'+Math.sin(a)*v+'px) scale(0)',opacity:0}],{duration:700+Math.random()*300,easing:'cubic-bezier(0,.9,.3,1)'}).onfinish=()=>d.remove()}}
+
+/* ===== SCROLL REVEAL ===== */
+const ob=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.ti').forEach(el=>ob.observe(el));
+document.querySelectorAll('.mc').forEach((el,i)=>{el.style.transitionDelay=i*.08+'s';ob.observe(el)});
+document.querySelectorAll('.kw').forEach((el,i)=>{el.style.transitionDelay=i*.08+'s';ob.observe(el)});
+
+/* ===== COUNTERS ===== */
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){animateC();so.unobserve(e.target)}}),{threshold:.5});
+const st=document.querySelector('.stats');if(st)so.observe(st);
+function animateC(){document.querySelectorAll('[data-c]').forEach(el=>{const t=+el.dataset.c,d=1800,s=performance.now();
+!function f(n){const p=Math.min((n-s)/d,1),e=p===1?1:1-Math.pow(2,-10*p);el.textContent=Math.round(e*t);if(p<1)requestAnimationFrame(f)}(performance.now())})}
+
+/* ===== SMOOTH ANCHOR ===== */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)scrollTo({top:t.getBoundingClientRect().top+scrollY-65,behavior:'smooth'})});
+</script>
+</body>
+</html>
